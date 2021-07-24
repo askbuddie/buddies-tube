@@ -1,4 +1,5 @@
-import "./App.css";
+import Button from './components/Button';
+import './styles/App.css';
 
 function App() {
   return (
@@ -12,11 +13,11 @@ function App() {
             rel="noopener noreferrer"
           >
             Ask Buddie
-          </a>{" "}
+          </a>
           's Buddies Tube
         </h1>
 
-        <button className="App-cta">Start Streaming</button>
+        <Button modifier="Button--cta">Start Streaming</Button>
       </header>
     </div>
   );
