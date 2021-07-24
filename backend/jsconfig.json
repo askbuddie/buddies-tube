@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+      "module": "es6",
+      "target": "es2020",
+      "paths": {
+        "@controllers/*": ["./src/controllers*"],
+        "@routers/*": ["./src/routers*"],
+        "@models/*": ["./src/models*"]
+      }
+    },
+    "exclude": ["node_modules"]
+}
