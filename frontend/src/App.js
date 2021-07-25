@@ -1,3 +1,4 @@
+import React from 'react';
 import Button from './components/Button';
 import './styles/App.css';
 
@@ -14,7 +15,7 @@ function App() {
           >
             Ask Buddie
           </a>
-          's Buddies Tube
+          &apos;s Buddies Tube
         </h1>
 
         <Button modifier="Button--cta">Start Streaming</Button>
