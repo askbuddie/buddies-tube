@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - You have Node 14+ installed.
+- You have [mongodb's local instance](https://docs.mongodb.com/guides/server/install/) installed
 - Fundamental knowledge of [ReactJS](https://reactjs.org/).
 
 ## Initial Steps
@@ -37,12 +38,10 @@ cd frontend
 yarn install # installs the frontend dependencies
 ```
 
-
 ```bash
 cd backend
 yarn install # installs the backend dependencies
 ```
-
 
 ## The generic workflow
 
@@ -58,10 +57,24 @@ git pull upstream main
 git checkout -b [branchName] # eg. git checkout -b signup-feature
 ```
 
-3. Start the server
+3. Start the app(frontend+backend)
 
 ```bash
+mongod # mongodb's local instance
 yarn dev # frontend on http://localhost:8888, backend on http://localhost:3000
+```
+
+_Frontend only_
+
+```bash
+yarn frontend # create-react-app on port 8888
+```
+
+_Backend only_
+
+```bash
+mongod # mongodb's local instance
+yarn backend # create-react-app on port 8888
 ```
 
 4. Do your change / Implement a new feature
