@@ -1,5 +1,6 @@
-import app from "./app";
+import envs from '@utils/env';
+import app from './app';
 
-const port = 3000;
+const { port } = envs;
 
 app.listen(port, () => console.log(`The server is listening on port ${port}`));
