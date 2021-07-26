@@ -13,6 +13,17 @@
             "jsx": true
         }
     },
+    "settings": {
+        "import/resolver": {
+            "alias": {
+              "map": [
+                ["@models", "./src/models/"],
+                ["@controllers", "./src/controllers/"],
+                ["@routers", "./src/routers/"],
+                ["@utils", "./src/utils/"]
+              ]
+            }
+    },
     "env": {
         "es6": true,
         "browser": true,
