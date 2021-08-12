@@ -6,6 +6,13 @@
 - You have [mongodb's local instance](https://docs.mongodb.com/guides/server/install/) installed
 - Fundamental knowledge of [ReactJS](https://reactjs.org/).
 
+## ER Diagram
+![ER diagram of buddies-tube](https://user-images.githubusercontent.com/44515005/129190299-9d0ad362-91f3-47ea-aa0f-6e913962982d.png)
+
+## Simplified application flow
+![Sequence diqgram for buddies-tube](https://user-images.githubusercontent.com/44515005/129190411-4d762884-4c2d-4012-b20b-5b24a3bbd41c.png)
+
+
 ## Initial Steps
 
 1. Fork this repository,
