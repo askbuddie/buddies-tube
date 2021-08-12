@@ -1,7 +1,15 @@
 import express from 'express';
+import usersRouter from '@routers/users';
 
 const app = express();
 
-app.get('/', (req, res) => res.status(200).json({ message: 'Hello from /' }));
+// ways to submit data to the server
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// setup routers
+
+app.use('/users', usersRouter);
 
 export default app;
