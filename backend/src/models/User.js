@@ -20,17 +20,14 @@ const userSchema = new Schema({
   joinedOn: {
     type: Date,
     default: new Date(),
-    required: true,
   },
   lastLogin: {
     type: Date,
     default: new Date(),
-    required: true,
   },
   subscriptions: {
     type: Array,
     default: [],
-    required: true,
   },
   picture: {
     type: String,
