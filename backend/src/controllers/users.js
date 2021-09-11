@@ -10,7 +10,10 @@ export function create(req, res) {
       return res.status(201).json({ message: user });
     })
     .catch((error) => {
-      console.log(error.message);
-      return res.status(500).json({ message: 'Something went wrong' });
+      const { message, name } = error;
+      if (name === 'ValidationError') {
+        return res.status(400).json({ message });
+      }
+      return res.status(500).json({ message });
     });
 }
