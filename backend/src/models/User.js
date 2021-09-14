@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema({
   firstName: {
@@ -40,14 +41,22 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
   }
   // TODO: hash the password here with bcryptjs ref. https://stackoverflow.com/a/53431995
-  this.password = 'hashedPassword';
-  return next();
+  try {
+    this.password = await bcrypt.hash(this.password, 10);
+    return next();
+  } catch (error) {
+    next(error);
+  }
 });
+
+userSchema.methods.validatePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
 
 const User = new model('User', userSchema);
 
