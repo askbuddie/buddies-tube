@@ -63,7 +63,6 @@ userSchema.methods.validatePassword = async function (password) {
 userSchema.path('email').validate(function (value) {
   const emailregx =
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  console.log(1);
   return emailregx.test(value);
 }, 'Email must be valid');
 
@@ -72,7 +71,6 @@ userSchema.path('email').validate(function (value) {
 userSchema.path('email').validate(async function (value) {
   // this.constructor is the model we are using
   const user = await this.constructor.findOne({ email: value });
-  console.log(2);
   return !user;
 }, 'Email already exists');
 
