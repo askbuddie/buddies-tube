@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema({
   firstName: {
@@ -40,14 +41,39 @@ const userSchema = new Schema({
   },
 });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();
   }
   // TODO: hash the password here with bcryptjs ref. https://stackoverflow.com/a/53431995
-  this.password = 'hashedPassword';
-  return next();
+  try {
+    this.password = await bcrypt.hash(this.password, 10);
+    return next();
+  } catch (error) {
+    next(error);
+  }
 });
+
+userSchema.methods.validatePassword = async function (password) {
+  return await bcrypt.compare(password, this.password);
+};
+
+
+
+userSchema.path('email').validate(function (value) {
+  const emailregx =
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return emailregx.test(value);
+}, 'Email must be valid');
+
+
+// This will run after the email is validated and will check if the email is already in use
+userSchema.path('email').validate(async function (value) {
+  // this.constructor is the model we are using
+  const user = await this.constructor.findOne({ email: value });
+  return !user;
+}, 'Email already exists');
+
 
 const User = new model('User', userSchema);
 
