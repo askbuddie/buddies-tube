@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose';
 import userStructure from './structure';
 import bcrypt from 'bcryptjs';
+import isEmail from 'validator/lib/isEmail';
 import { isEmailUnique } from './validations';
 
 const userSchema = new Schema(userStructure);
@@ -18,13 +19,7 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-userSchema.path('email').validate(function (value) {
-  const emailregx =
-    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return emailregx.test(value);
-}, 'Email must be valid');
-
-// This will run after the email is validated and will check if the email is already in use
+userSchema.path('email').validate(isEmail, 'Email must be valid');
 userSchema.path('email').validate(isEmailUnique, 'Email already exists');
 
 userSchema.methods.validatePassword = async function (password) {
