@@ -30,7 +30,7 @@ export default {
   },
   picture: {
     type: String,
-    default: 'https://someplaceholder.com',
+    default: 'https://ui-avatars.com/api/?background=random',
   },
   badges: {
     type: Array,

@@ -19,6 +19,11 @@ userSchema.pre('save', async function (next) {
   }
 });
 
+userSchema.pre('save', function (next) {
+  this.picture = `${this.picture}&name=${this.firstName}+${this.lastName}`;
+  return next();
+});
+
 userSchema.path('email').validate(isEmail, 'Email must be valid');
 userSchema.path('email').validate(isEmailUnique, 'Email already exists');
 
