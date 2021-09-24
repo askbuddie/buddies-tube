@@ -24,8 +24,13 @@ userSchema.pre('save', function (next) {
   return next();
 });
 
-userSchema.path('email').validate(isEmail, 'Email must be valid');
-userSchema.path('email').validate(isEmailUnique, 'Email already exists');
+userSchema.path('email').validate(isEmail, 'You must provide a valid email');
+userSchema
+  .path('email')
+  .validate(
+    isEmailUnique,
+    'The email you provided already exists on our database'
+  );
 
 userSchema.methods.validatePassword = async function (password) {
   return await bcrypt.compare(password, this.password);
