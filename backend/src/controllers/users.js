@@ -12,8 +12,13 @@ export function create(req, res) {
     .catch((error) => {
       const { message, name } = error;
       if (name === 'ValidationError') {
-        return res.status(400).json({ message });
+        var errorsOnly = message.split('User validation failed:')[1];
+        var errorsArray = errorsOnly.split(',');
+        var readableErrors = errorsArray.map((error) =>
+          error.split(':')[1].trim()
+        );
+        return res.status(400).json({ error: readableErrors });
       }
-      return res.status(500).json({ message });
+      return res.status(500).json({ error: message });
     });
 }
