@@ -6,8 +6,8 @@ export function create(req, res) {
   user
     .save()
     .then((user) => {
-      console.log(user);
-      return res.status(201).json({ message: user });
+      const { _id } = user;
+      return res.status(201).json({ message: { _id } });
     })
     .catch((error) => {
       const { message, name } = error;
