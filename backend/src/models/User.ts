@@ -1,6 +1,18 @@
 import { Schema, model } from 'mongoose';
 
-const userSchema = new Schema({
+interface User {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  joinedOn?: Date;
+  lastLogin?: Date;
+  subscriptions?: any[];
+  picture?: string;
+  badges?: any[];
+}
+
+const userSchema = new Schema<User>({
   firstName: {
     type: String,
     required: true,
@@ -39,6 +51,6 @@ const userSchema = new Schema({
   },
 });
 
-const User = new model('User', userSchema);
+const User = model<User>('User', userSchema);
 
 export default User;
