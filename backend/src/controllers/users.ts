@@ -1,6 +1,6 @@
 import User from '@models/User';
-
-export function create(req, res) {
+import { Request, Response } from 'express';
+export function create(req: Request, res: Response) {
   const { body } = req;
   const user = new User(body);
   user

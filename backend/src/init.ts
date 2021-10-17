@@ -4,7 +4,7 @@ import db from './db';
 
 const { port } = envs;
 
-(async function init() {
+(async function init(): Promise<void> {
   try {
     await db();
     console.log('connected to the database');
