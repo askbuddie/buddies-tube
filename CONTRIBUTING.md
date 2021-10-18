@@ -4,7 +4,6 @@
 
 - You have Node 14+ installed.
 - You have [mongodb's local instance](https://docs.mongodb.com/guides/server/install/) installed
-- Fundamental knowledge of [ReactJS](https://reactjs.org/).
 
 ## ER Diagram
 ![ER diagram of buddies-tube](https://user-images.githubusercontent.com/44515005/129190299-9d0ad362-91f3-47ea-aa0f-6e913962982d.png)
@@ -37,18 +36,7 @@ cd buddies-tube
 ```
 
 ```bash
-yarn install # installs the base dependencies
-```
-
-```bash
-cd frontend
-yarn install # installs the frontend dependencies
-```
-
-```bash
-cd backend
-yarn install # installs the backend dependencies
-```
+yarn install # installs the base dependencies```
 
 ## The generic workflow
 
@@ -68,20 +56,7 @@ git checkout -b [branchName] # eg. git checkout -b signup-feature
 
 ```bash
 mongod # mongodb's local instance
-yarn dev # frontend on http://localhost:8888, backend on http://localhost:3000
-```
-
-_Frontend only_
-
-```bash
-yarn frontend # create-react-app on port 8888
-```
-
-_Backend only_
-
-```bash
-mongod # mongodb's local instance
-yarn backend # create-react-app on port 8888
+yarn start # http://localhost:3000
 ```
 
 4. Do your change / Implement a new feature
