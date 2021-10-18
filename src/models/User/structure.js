@@ -1,6 +1,4 @@
-import { Schema, model } from 'mongoose';
-
-const userSchema = new Schema({
+export default {
   firstName: {
     type: String,
     required: true,
@@ -16,6 +14,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+    minLength: [8, 'Password must be of at least 8 characters.'],
   },
   joinedOn: {
     type: Date,
@@ -31,14 +30,10 @@ const userSchema = new Schema({
   },
   picture: {
     type: String,
-    default: 'https://someplaceholder.com',
+    default: 'https://ui-avatars.com/api/?background=random',
   },
   badges: {
     type: Array,
     default: ['new member'],
   },
-});
-
-const User = new model('User', userSchema);
-
-export default User;
+};
