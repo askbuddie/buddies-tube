@@ -32,8 +32,11 @@ userSchema
     'The email you provided already exists on our database'
   );
 
-userSchema.methods.validatePassword = async function (password) {
-  return await bcrypt.compare(password, this.password);
+userSchema.methods.validatePassword = async function (
+  password,
+  hashedPassword
+) {
+  return await bcrypt.compare(password, hashedPassword);
 };
 
 const User = new model('User', userSchema);
