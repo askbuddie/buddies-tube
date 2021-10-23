@@ -39,6 +39,10 @@ userSchema.methods.validatePassword = async function (
   return await bcrypt.compare(password, hashedPassword);
 };
 
+userSchema.methods.doesEmailExist = async function (value) {
+  return await this.constructor.findOne({ email: value });
+};
+
 const User = new model('User', userSchema);
 
 export default User;
