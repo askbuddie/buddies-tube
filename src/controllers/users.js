@@ -22,3 +22,45 @@ export function create(req, res) {
       return res.status(500).json({ error: message });
     });
 }
+
+export async function login(req, res) {
+  const { email, password } = req.body;
+  if (
+    typeof email === 'undefined' ||
+    email === '' ||
+    typeof password === 'undefined' ||
+    password === ''
+  ) {
+    return res
+      .status(400)
+      .json({ error: 'You must provide both email and password' });
+  }
+  if (typeof email !== 'string') {
+    return res
+      .status(400)
+      .json({ error: 'The provided email is not of valid type' });
+  }
+  if (typeof password !== 'string') {
+    return res
+      .status(400)
+      .json({ error: 'The provided password is not of valid type' });
+  }
+
+  // authenticate user
+  const user = await User.prototype.doesEmailExist(email);
+  if (!user) {
+    return res.status(400).json({
+      error: `The provided email '${email}' doesn't exist on our database`,
+    });
+  }
+  const isPasswordValid = await User.prototype.validatePassword(
+    password,
+    user.password
+  );
+  if (!isPasswordValid) {
+    return res.status(400).json({
+      error: `The provided password is incorredt`,
+    });
+  }
+  return res.status(200).json({ message: `Trying to login for ${email}` });
+}
