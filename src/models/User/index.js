@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose';
 import userStructure from './structure';
 import bcrypt from 'bcryptjs';
 import isEmail from 'validator/lib/isEmail';
+import isAlpha from 'validator/lib/isAlpha';
 import { isEmailUnique } from './validations';
 
 const userSchema = new Schema(userStructure);
@@ -25,6 +26,9 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.path('email').validate(isEmail, 'You must provide a valid email');
+userSchema
+  .path('lastName')
+  .validate(isAlpha, 'The last name should only contain alphabets');
 userSchema
   .path('email')
   .validate(
