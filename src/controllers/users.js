@@ -58,7 +58,7 @@ export async function login(req, res) {
     user.password
   );
   if (!isPasswordValid) {
-    return res.status(400).json({
+    return res.status(401).json({
       error: `The provided password is incorredt`,
     });
   }
