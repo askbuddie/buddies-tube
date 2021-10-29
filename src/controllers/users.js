@@ -59,7 +59,7 @@ export async function login(req, res) {
   );
   if (!isPasswordValid) {
     return res.status(401).json({
-      error: `The provided password is incorredt`,
+      error: `The provided password is incorrect`,
     });
   }
   return res.status(200).json({ message: `Trying to login for ${email}` });
