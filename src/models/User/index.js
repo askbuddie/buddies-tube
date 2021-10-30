@@ -26,9 +26,11 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.path('email').validate(isEmail, 'You must provide a valid email');
-userSchema
-  .path('firstName')
+userSchema.path('firstName')
   .validate(isAlpha, 'The first name should only contain alphabets');
+userSchema
+  .path('lastName')
+  .validate(isAlpha, 'The last name should only contain alphabets');
 userSchema
   .path('email')
   .validate(
