@@ -1,4 +1,6 @@
 import User from '@models/User';
+const jwt = require('jsonwebtoken');
+const accessToken = require('crypto').randomBytes(64).toString('hex')
 
 export function create(req, res) {
   const { body } = req;
@@ -62,5 +64,13 @@ export async function login(req, res) {
       error: `The provided password is incorrect`,
     });
   }
-  return res.status(200).json({ message: `Trying to login for ${email}` });
+  var payload = {
+    "email": email,
+    "password": password
+  }
+  return res.status(200).body(generateToken(payload))
+}
+
+function generateToken(payload) {
+  return jwt.sign(payload, accessToken, {expiresIn: '3600s'});
 }
