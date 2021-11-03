@@ -29,7 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "mongoose": "^5.13.3",
-    "validator": "^13.6.0"
+    "validator": "^13.7.0"
   },
   "_moduleAliases": {
     "@routers": "./src/routers",
