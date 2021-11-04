@@ -1,6 +1,7 @@
 import User from '@models/User';
+const dotenv = require('dotenv');
 const jwt = require('jsonwebtoken');
-const accessToken = require('crypto').randomBytes(64).toString('hex')
+dotenv.config();
 
 export function create(req, res) {
   const { body } = req;
@@ -64,13 +65,9 @@ export async function login(req, res) {
       error: `The provided password is incorrect`,
     });
   }
-  var payload = {
-    "email": email,
-    "password": password
-  }
-  return res.status(200).body(generateToken(payload))
+  return res.status(200).body(generateToken(email))
 }
 
-function generateToken(payload) {
-  return jwt.sign(payload, accessToken, {expiresIn: '3600s'});
+function generateToken(email) {
+  return jwt.sign(email, process.env.TOKEN_SECRET, {expiresIn: '1800s'});
 }
